@@ -7,10 +7,10 @@ include 'config/dbconn.php';
 
 $id = $_GET['id'];
 
-$query = "SELECT * FROM wedding_service WHERE id='$id'";
+$query = "SELECT * FROM birthday_service WHERE id='$id'";
 $result = mysqli_query($connection, $query);
 
-$row = mysqli_fetch_assoc($result);
+$row2 = mysqli_fetch_assoc($result);
 
 
 ?>
@@ -86,12 +86,12 @@ include("includes/topbar.php");
             
             <div class="form-group">
                 <label for="service_type">Package Title</label>
-                <input type="text" name="service_type" value="<?php echo $row['service_type'] ?>" class="form-control" id="wedding_type"  placeholder="Enter package name">
+                <input type="text" name="service_type" value="<?php echo $row2['service_type'] ?>" class="form-control" id="wedding_type"  placeholder="Enter package name">
             </div>
 
             <div class="form-group">
                 <label for="price">Price Of This Package</label>
-                <input type="text" name="price" value="<?php echo $row['price'] ?>" class="form-control" id="price"  placeholder="Enter the price">
+                <input type="text" name="price" value="<?php echo $row2['price'] ?>" class="form-control" id="price"  placeholder="Enter the price">
             </div>
 
             <div class="form-group">
@@ -107,7 +107,7 @@ include("includes/topbar.php");
     </div>
     
     <div class="col-lg-4 mt-4">
-        <img src="<?php echo $row['image'] ?>" width="380" height="306"  alt="">
+        <img src="<?php echo $row2['image'] ?>" width="380" height="306"  alt="">
     </div>
      </form>
 
@@ -128,6 +128,7 @@ include("includes/footer.php");
 </body>
 </html>
 
+
 <?php
 
 if (isset($_POST['update'])) {
@@ -144,10 +145,10 @@ if (isset($_POST['update'])) {
         move_uploaded_file($image_tmp, $image_path);
 
         // Update the image path in the database
-        $query = "UPDATE wedding_service SET service_type='$service_type', price='$price', image='$image_path' WHERE id = '$id'";
+        $query = "UPDATE birthday_service SET service_type='$service_type', price='$price', image='$image_path' WHERE id = '$id'";
     } else {
         // If no new image is uploaded, update only text fields
-        $query = "UPDATE wedding_service SET service_type='$service_type', price='$price' WHERE id = '$id'";
+        $query = "UPDATE birthday_service SET service_type='$service_type', price='$price' WHERE id = '$id'";
     }
 
     $result = mysqli_query($connection, $query);
@@ -161,6 +162,7 @@ if (isset($_POST['update'])) {
 }
 
 ?>
+
 
 
 

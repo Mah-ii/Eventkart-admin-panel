@@ -6,6 +6,9 @@ $result = mysqli_query($connection, $query);
 
 $query1 = "SELECT * FROM features_list";
 $result1 = mysqli_query($connection, $query1);
+
+$query2 = "SELECT * FROM birthday_service";
+$result2 = mysqli_query($connection, $query2);
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +96,7 @@ $result1 = mysqli_query($connection, $query1);
                                 <div class="card-header">
                                 <h4>Birthday Packages</h4>
                                 <div class="button-container">
-                                    <a href="add_package.php" class="btn btn-md btn-success"><i class="mdi mdi-buffer mr-2"></i>Add New Package.</a>
+                                    <a href="birthday_package.php" class="btn btn-md btn-success"><i class="mdi mdi-buffer mr-2"></i>Add New Package.</a>
                                 </div>
                             </div>
 
@@ -109,15 +112,15 @@ $result1 = mysqli_query($connection, $query1);
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row = mysqli_fetch_assoc($result)) {
+                                        while ($row2 = mysqli_fetch_assoc($result2)) {
                                             echo "<tr>";
-                                            echo "<td>" . $row['id'] . "</td>";
-                                            echo "<td>" . $row['service_type'] . "</td>";
-                                            echo "<td>" . $row['price'] . "</td>";
+                                            echo "<td>" . $row2['id'] . "</td>";
+                                            echo "<td>" . $row2['service_type'] . "</td>";
+                                            echo "<td>" . $row2['price'] . "</td>";
                                             echo "<td>
-                                                  <a href='service_edit.php?id=" . $row['id'] . "' class='btn btn-info btn-sm active'><i class='mdi mdi-account-edit'></i></a>
-                                                  <a href='service_delete.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm active'><i class='mdi mdi-delete' onclick='return checkdelete()'></i></a>
-                                                  <button type='button' name='view' value='view' id='" . $row['id'] . "' class='btn btn-info btn-sm view_data'>
+                                                  <a href='birthday_edit.php?id=" . $row2['id'] . "' class='btn btn-info btn-sm active'><i class='mdi mdi-account-edit'></i></a>
+                                                  <a href='birthday_delete.php?id=" . $row2['id'] . "' class='btn btn-danger btn-sm active'><i class='mdi mdi-delete' onclick='return checkdelete()'></i></a>
+                                                  <button type='button' name='view' value='view' id='" . $row2['id'] . "' class='btn btn-info btn-sm view_data1' >
                                                   <i class='mdi mdi-eye-outline'></i> 
                                               </button>
                                               </td>";
@@ -134,6 +137,7 @@ $result1 = mysqli_query($connection, $query1);
                                 <hr>
 
                                 <div class="card-header">
+                                <h4>Features List</h4>
                                     <div class="button-container">
                                         <a href="feature_add.php" class="btn btn-md btn-success"><i class="mdi mdi-account-plus"></i>Add New Features.</a>
                                     </div>
@@ -156,8 +160,9 @@ $result1 = mysqli_query($connection, $query1);
                                             echo "<td>" . $row1['service_type'] . "</td>";
                                             echo "<td>" . $row1['title'] . " </td>";
                                             echo "<td>
-                                                  <a href='feature_edit.php?id=" . $row1['feature_id'] . "' class='btn btn-secondary btn-sm' data-toggle='tooltip' data-placement='top' title='Edit This feature'><i class='mdi mdi-pen'></i></a>
-                                                  <a href='feature_delete.php?id= " . $row1['feature_id'] . "' class='btn btn-danger btn-sm' data-toggle='tooltip' data-placement='top' title='Delete This feature'><i class='mdi mdi-delete'></i></a>
+                                                  <a href='feature_edit.php?feature_id=" . $row1['feature_id'] . "' class='btn btn-secondary btn-sm' data-toggle='tooltip' data-placement='top' title='Edit This feature'><i class='mdi mdi-pen'></i></a>
+                                                  <a href='feature_delete.php?feature_id=" . $row1['feature_id'] . "' class='btn btn-danger btn-sm active'><i class='mdi mdi-delete' onclick='return checkdelete()'></i></a>
+
                                                 </td>";
                                             echo "</tr>";
                                         }
@@ -222,6 +227,29 @@ $result1 = mysqli_query($connection, $query1);
             }
         });
     </script>
+
+<script>
+        $(document).on('click', '.view_data1', function () {
+            var id = $(this).attr("id");
+            if (id !== '') {
+                $.ajax({
+                    url: "select1.php",
+                    method: "POST",
+                    data: { id: id },
+                    success: function (data) {
+                        $('#packageDetailContent').html(data);
+                        $('#packageDetailsModal').modal('show');
+                    }
+                });
+            }
+        });
+    </script>
+
+  
+
+    
+
+   
 
     <?php
     include("includes/footer.php");

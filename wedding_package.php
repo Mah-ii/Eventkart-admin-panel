@@ -113,11 +113,11 @@ include("includes/topbar.php");
 
                         <select class="custom-select form-control" id="service_type" name="service_type" style="font-size:15px; margin-bottom:1.2rem;">
                             <option value=" " > Select Package</option>
-                            <option value="Classic Box"  >Classic Box</option>
-                            <option value="Elegant Box" >Elegant Box</option>
-                            <option value="Elite Box"  >Elite Box</option>
-                            <option value="Gold Box"  >Gold Box</option>
-                            <option value="Premium Box"  >Premium Box</option>
+                            <option value="Enchanting Unions Packages">Enchanting Unions Packages</option>
+                            <option value="Harmony Haven Bundles">Harmony Haven Bundles</option>
+                            <option value="Whispering Willows Celebrations">Whispering Willows Celebrations</option>
+                            <option value="Radiant Vows Packages">Radiant Vows Packages</option>
+                            <option value="Timeless Treasures Bundle">Timeless Treasures Bundle</option>
                             
                         </select>
                     </div>

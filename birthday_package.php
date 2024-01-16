@@ -5,19 +5,37 @@ include 'config/dbconn.php';
 
 if (isset($_POST['submit'])) {
     $service_type = $_POST['service_type'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
+    $features = $_POST['features'];
+    $price = $_POST['price'];
     
-    // Insert data into the 'features_list' table
-    $query1 = "INSERT INTO features_list (service_type, title, description)
-              VALUES ( '$service_type', '$title', '$description')";
 
-    if (mysqli_query($connection, $query1)) {
+    // File upload handling
+    $image= ''; // Placeholder for image path in the database
+
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $upload_dir = 'uploads/'; // Change this to your desired upload directory
+        $image_name = basename($_FILES['image']['name']);
+        $target_path = $upload_dir . $image_name;
+
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
+            $image_path = $target_path;
+        } else {
+            echo 'Image upload failed.';
+            exit;
+        }
+    }
+
+    // Insert data into the 'birthday_service' table
+    $query2 = "INSERT INTO birthday_service (service_type, image, price)
+              VALUES ( '$service_type', '$image_path', '$price')";
+
+    if (mysqli_query($connection, $query2)) {
         header('Location: services.php');
         exit;
     } else {
         echo 'Error: ' . mysqli_error($connection);
     }
+
 }
 
 // Close the database connection
@@ -27,6 +45,7 @@ mysqli_close($connection);
 
 
 
+?>
 
 
 
@@ -84,9 +103,9 @@ include("includes/topbar.php");
 
             <form method="post" action="" enctype="multipart/form-data">
 
-            
+                <h4 class="h4 mt-4 pb-2" style="border-bottom: 1px solid #dee2e6!important;">Add New Package</h4>
 
-                <h4 class="h4 mt-4 pb-2" style="color:black">Add New Features</h4>
+                
 
                 <div class="form-group">
                         
@@ -94,28 +113,23 @@ include("includes/topbar.php");
 
                         <select class="custom-select form-control" id="service_type" name="service_type" style="font-size:15px; margin-bottom:1.2rem;">
                             <option value=" " > Select Package</option>
-                            <option value="Enchanting Unions Packages">Enchanting Unions Packages</option>
-                            <option value="Harmony Haven Bundles">Harmony Haven Bundles</option>
-                            <option value="Whispering Willows Celebrations">Whispering Willows Celebrations</option>
-                            <option value="Radiant Vows Packages">Radiant Vows Packages</option>
-                            <option value="Timeless Treasures Bundle">Timeless Treasures Bundle</option>
                             <option value="Cake-Quake Fiesta"  >Cake-Quake Fiesta</option>
                             <option value="Balloon Bonanza Bash" >Balloon Bonanza Bash</option>
                             <option value="Giggles & Gumdrops Gala"  >Giggles & Gumdrops Gala</option>
+                            
                             
                         </select>
                     </div>
 
                 <div class="form-group">
-                    <label for="title" style="font-size :15px;">Features Title</label>
-                    <input type="text" name="title" class="form-control" id="title" placeholder="Enter the features" style="font-size:15px; margin-bottom:1.2rem;">
+                    <label for="price" style="font-size :15px;">Price Of This Package</label>
+                    <input type="text" name="price" class="form-control" id="price" placeholder="Enter the price" style="font-size:15px; margin-bottom:1.2rem;">
                 </div>
 
                 <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Enter description of the features"></textarea>
+                    <label for="image" style="font-size :15px;">Preview Image</label>
+                    <input type="file" name="image" style="font-size:15px; margin-bottom:1.2rem;">
                 </div>
-
 
                 <!-- Button container -->
                 <div class="button-container">
