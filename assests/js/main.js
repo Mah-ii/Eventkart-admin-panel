@@ -43,9 +43,11 @@ collapseElement.addEventListener('click', function () {
 });
 
 
+
 */
 
 /*
+
 const childItems = document.querySelectorAll('#masterCollapse .nav-item');
 const parentCollapse = document.querySelector('#masterCollapse');
 
@@ -56,6 +58,5 @@ for (let i = 0; i < childItems.length; i++) {
     break;
   }
 }
-
 
 */

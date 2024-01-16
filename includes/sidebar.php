@@ -5,9 +5,9 @@
       <div class="sidebar shadow">
         <div class="admin_brand d-flex justify-content-between align-items-baseline">
           <div>
-            <a class="nav-link fw-bold" href="#">
+            <a class="nav-link fw-bold" href="index.php">
               <span class="icon"><i class="fas fa-code"></i></span>
-              <span class="menu">Admin Panel</span>
+              <span class="menu">Eventkart</span>
             </a>
           </div>
           <div class="d-block d-md-none">
@@ -18,7 +18,7 @@
         <ul class="nav nav-pills flex-column">
 
           <li class="nav-item ">
-            <a class="nav-link" href="index2.php">
+            <a class="nav-link" href="index.php">
               <span class="icon" data-bs-toggle="tooltip" data-bs-title="Dashboard"><i class="fas fa-dashboard"></i></span>
               <span class="menu">Dashboard</span>
             </a>
@@ -32,7 +32,7 @@
           </li>
 
           <li class="nav-item ">
-            <a class="nav-link" href="clients.php">
+            <a class="nav-link" href="client.php">
               <span class="icon" data-bs-toggle="tooltip" data-bs-title="Clients"><i class="fa-solid fa-users"></i></span>
               <span class="menu">Clients</span>
             </a>
@@ -71,7 +71,7 @@
 
 
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="task_calendar.php">
               <span class="icon" data-bs-toggle="tooltip" data-bs-title="Logout"><i class="fa-solid fa-list-check"></i></span>
               <span class="menu">Task Calendar</span>
             </a>
